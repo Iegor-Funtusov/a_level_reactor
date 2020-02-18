@@ -1,0 +1,71 @@
+<div fxLayout="row" fxLayoutAlign="center" class="mt-5">
+  <mat-card>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="NEW_YORK_STOCK_EXCHANGE">
+        <mat-header-cell *matHeaderCellDef>NEW YORK STOCK
+          <mat-divider [vertical]="true"></mat-divider>
+          <div *ngIf="NEW_YORK_STOCK_EXCHANGE_UP_LOADING | async; else elseBlock"><mat-icon aria-hidden="false" color="accent">arrow_downward</mat-icon></div>
+          <mat-divider [vertical]="true"></mat-divider>
+          <span style="color: green">{{ NEW_YORK_STOCK_EXCHANGE_MAX | currency }}</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="color: rgba(255, 46, 38, 1)"> {{ initTableState(element) }} {{ element.chartData.NEW_YORK_STOCK_EXCHANGE | currency }}</mat-cell>
+        <!--      <mat-footer-cell *matFooterCellDef></mat-footer-cell>-->
+      </ng-container>
+
+      <ng-container matColumnDef="NASDAQ">
+        <mat-header-cell *matHeaderCellDef>NASDAQ
+          <mat-divider [vertical]="true"></mat-divider>
+          <div *ngIf="NASDAQ_UP_LOADING | async; else elseBlock"><mat-icon aria-hidden="false" color="accent">arrow_downward</mat-icon></div>
+          <mat-divider [vertical]="true"></mat-divider>
+          <span style="color: green">{{ NASDAQ_MAX | currency }}</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="color: rgba(13, 146, 255, 1)"> {{ initTableState(element) }} {{ element.chartData.NASDAQ | currency }}</mat-cell>
+        <!--      <mat-footer-cell *matFooterCellDef>{{ ytuMax }}</mat-footer-cell>-->
+      </ng-container>
+
+      <ng-container matColumnDef="AMERICAN_STOCK_EXCHANGE">
+        <mat-header-cell *matHeaderCellDef>AMERICAN STOCK
+          <mat-divider [vertical]="true"></mat-divider>
+          <div *ngIf="AMERICAN_STOCK_EXCHANGE_UP_LOADING | async; else elseBlock"><mat-icon aria-hidden="false" color="accent">arrow_downward</mat-icon></div>
+          <mat-divider [vertical]="true"></mat-divider>
+          <span style="color: green">{{ AMERICAN_STOCK_EXCHANGE_MAX | currency }}</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="color: rgba(251, 140, 0, 1)"> {{ initTableState(element) }} {{ element.chartData.AMERICAN_STOCK_EXCHANGE | currency }}</mat-cell>
+        <!--      <mat-footer-cell *matFooterCellDef>{{ ttoMax }}</mat-footer-cell>-->
+      </ng-container>
+
+      <ng-container matColumnDef="RUSSELL_INVESTMENT_GROUP">
+        <mat-header-cell *matHeaderCellDef>RUSSELL INVESTMENT GROUP
+          <mat-divider [vertical]="true"></mat-divider>
+          <div *ngIf="RUSSELL_INVESTMENT_GROUP_UP_LOADING | async; else elseBlock"><mat-icon aria-hidden="false" color="accent">arrow_downward</mat-icon></div>
+          <mat-divider [vertical]="true"></mat-divider>
+          <span style="color: green">{{ RUSSELL_INVESTMENT_GROUP_MAX | currency }}</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="color: darkolivegreen"> {{ initTableState(element) }} {{ element.chartData.RUSSELL_INVESTMENT_GROUP | currency }}</mat-cell>
+        <!--      <mat-footer-cell *matFooterCellDef>{{ gguiMax }}</mat-footer-cell>-->
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>
+      <!--    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>-->
+    </table>
+  </mat-card>
+
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center" class="mt-5">
+  <mat-card>
+    <canvas class="mat-elevation-z8" baseChart
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="'line'">
+    </canvas>
+  </mat-card>
+</div>
+
+<ng-template #elseBlock>
+  <div><mat-icon aria-hidden="false" color="primary">arrow_upward</mat-icon></div>
+</ng-template>
